@@ -1,15 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+
+// 型定義
+type UnsplashImage = {
+  urls: { thumb: string };
+  alt_description?: string;
+  links: { html: string };
+};
 
 export default function Home() {
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<
-    { role: "user" | "bot"; text?: string; imageUrl?: string; results?: any[] }[]
+    { role: "user" | "bot"; text?: string; imageUrl?: string; results?: UnsplashImage[] }[]
   >([]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +25,6 @@ export default function Home() {
 
     setImageFile(file);
     const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
 
     // ユーザーからのメッセージとして追加（プレビュー画像）
     setMessages((prev) => [
@@ -71,7 +77,7 @@ export default function Home() {
     reader.readAsDataURL(imageFile);
   };
 
-  const fetchUnsplashImages = async (query: string) => {
+  const fetchUnsplashImages = async (query: string): Promise<UnsplashImage[]> => {
     try {
       const res = await fetch(
         `https://api.unsplash.com/search/photos?query=${encodeURIComponent(
@@ -99,7 +105,8 @@ export default function Home() {
       {/* フローティングボタン */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white text-xl flex items-center justify-center rounded-full shadow-lg z-50 hover:bg-blue-700 transition"      >
+        className="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white text-xl flex items-center justify-center rounded-full shadow-lg z-50 hover:bg-blue-700 transition"
+      >
         {isOpen ? "×" : "💬"}
       </button>
 
@@ -120,9 +127,11 @@ export default function Home() {
                   } p-3 rounded-xl shadow max-w-[80%]`}
                 >
                   {msg.imageUrl && (
-                    <img
+                    <Image
                       src={msg.imageUrl}
                       alt="preview"
+                      width={300}
+                      height={200}
                       className="w-full mb-2 rounded"
                     />
                   )}
@@ -136,9 +145,11 @@ export default function Home() {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <img
+                          <Image
                             src={img.urls.thumb}
                             alt={img.alt_description || "unsplash image"}
+                            width={200}
+                            height={150}
                             className="rounded-md shadow-sm hover:shadow-md transition"
                           />
                         </a>
