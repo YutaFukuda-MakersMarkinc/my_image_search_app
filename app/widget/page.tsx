@@ -12,6 +12,7 @@ type UnsplashImage = {
 
 export default function Home() {
   const [imageFile, setImageFile] = useState<File | null>(null);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -105,9 +106,9 @@ export default function Home() {
       {/* フローティングボタン */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white text-xl flex items-center justify-center rounded-full shadow-lg z-50 hover:bg-blue-700 transition"
+        className="fixed bottom-6 right-6 px-4 py-3 bg-blue-600 text-white text-sm font-medium flex items-center gap-2 rounded-full shadow-lg z-50 hover:bg-blue-700 transition animate-bounce"
       >
-        {isOpen ? "×" : "🔍 写真で検索"}
+        <span>🔍 写真で検索</span>
       </button>
 
       {/* チャットウィジェット */}
@@ -120,7 +121,7 @@ export default function Home() {
                 className={`mb-3 flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`${
+                  className={`$${
                     msg.role === "user"
                       ? "bg-blue-600 text-white"
                       : "bg-gray-200 text-gray-800"
@@ -167,18 +168,19 @@ export default function Home() {
           </div>
 
           <div className="p-4 border-t">
-            <label className="block">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="mb-2 w-full text-sm"
-              />
+            <label className="block mb-2 text-sm font-medium text-gray-700">
+              画像ファイルを選択してください：
             </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            />
             <button
               onClick={handleSubmit}
               disabled={!imageFile || loading}
-              className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              className="w-full mt-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
             >
               画像を送信
             </button>
