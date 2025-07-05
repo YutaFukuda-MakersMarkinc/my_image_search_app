@@ -10,6 +10,7 @@
   iframe.style.zIndex = "9999";
   iframe.style.borderRadius = "16px";
   iframe.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
-  iframe.style.background = "transparent"
+  iframe.style.background = "transparent"; // ✅ 背景を透明に
+  iframe.allowTransparency = true; // ✅ 古いブラウザ対応
   document.body.appendChild(iframe);
 })();
