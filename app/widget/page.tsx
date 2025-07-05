@@ -107,7 +107,7 @@ export default function Home() {
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white text-xl flex items-center justify-center rounded-full shadow-lg z-50 hover:bg-blue-700 transition"
       >
-        {isOpen ? "×" : "💬"}
+        {isOpen ? "×" : "🔍 写真で検索"}
       </button>
 
       {/* チャットウィジェット */}
