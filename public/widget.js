@@ -1,6 +1,6 @@
 (function () {
   const iframe = document.createElement("iframe");
-  iframe.src = "https://https://my-image-search-app.vercel.app/embed";
+  iframe.src = "https://my-image-search-app.vercel.app/widget";
   iframe.style.position = "fixed";
   iframe.style.bottom = "20px";
   iframe.style.right = "20px";
