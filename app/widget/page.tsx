@@ -106,7 +106,7 @@ export default function Home() {
       {/* フローティングボタン */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 px-4 py-3 bg-blue-600 text-white text-sm font-medium flex items-center gap-2 rounded-full shadow-lg z-50 hover:bg-blue-700 transition animate-bounce bg-transparent"
+        className="fixed bottom-6 right-6 px-4 py-3 bg-blue-600 text-white text-sm font-medium flex items-center gap-2 rounded-full shadow-lg z-50 hover:bg-blue-700 transition animate-bounce"
       >
         <span>🔍 写真で検索</span>
       </button>
